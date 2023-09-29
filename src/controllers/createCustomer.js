@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { insertCustomer } = require("../repositories/insertCustomer");
 
-const createCostumer = async (req, res) => {
+const createCustomer = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
@@ -14,4 +14,4 @@ const createCostumer = async (req, res) => {
   }
 };
 
-module.exports = { createCostumer };
+module.exports = { createCustomer };
