@@ -4,6 +4,9 @@ const { getUserById } = require("../repositories/getUserById");
 
 const authenticateUser = async (req, res, next) => {
   const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({ message: "Usuário não autenticado" });
+  }
   const token = authorization.replace("Bearer", " ").trim();
   const { id } = jwt.verify(token, process.env.JWT_KEY);
 

@@ -7,6 +7,7 @@ const { loginSchema } = require("../schemas/loginSchema");
 const { loginCustomer } = require("../controllers/loginCustomer");
 const { authenticateUser } = require("../middlewares/authenticateUser");
 const { getUser } = require("../controllers/getUser");
+const { editCustomer } = require("../controllers/editCustomer");
 
 const router = Router();
 
@@ -21,5 +22,6 @@ router.post("/login", validateBody(loginSchema), loginCustomer);
 
 router.use(authenticateUser);
 router.get("/user", getUser);
+router.put("/user", validateBody(customerSchema), editCustomer);
 
 module.exports = router;
