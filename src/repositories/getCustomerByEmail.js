@@ -1,7 +1,7 @@
 const knex = require("../connect");
 
-const getUserByEmail = async (email) => {
+const getCustomerByEmail = async (email) => {
   return await knex("customers").where({ email: email }).first();
 };
 
-module.exports = { getUserByEmail };
+module.exports = { getCustomerByEmail };

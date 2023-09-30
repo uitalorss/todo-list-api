@@ -6,7 +6,7 @@ const { validateEmail } = require("../middlewares/validateEmail");
 const { loginSchema } = require("../schemas/loginSchema");
 const { loginCustomer } = require("../controllers/loginCustomer");
 const { authenticateUser } = require("../middlewares/authenticateUser");
-const { getUser } = require("../controllers/getUser");
+const { getCustomer } = require("../controllers/getCustomer");
 const { editCustomer } = require("../controllers/editCustomer");
 
 const router = Router();
@@ -21,7 +21,7 @@ router.post(
 router.post("/login", validateBody(loginSchema), loginCustomer);
 
 router.use(authenticateUser);
-router.get("/user", getUser);
+router.get("/user", getCustomer);
 router.put("/user", validateBody(customerSchema), editCustomer);
 
 module.exports = router;

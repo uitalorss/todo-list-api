@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { getUserById } = require("../repositories/getUserById");
+const { getCustomerById } = require("../repositories/getCustomerById");
 
 const authenticateUser = async (req, res, next) => {
   const { authorization } = req.headers;
@@ -11,7 +11,7 @@ const authenticateUser = async (req, res, next) => {
   const { id } = jwt.verify(token, process.env.JWT_KEY);
 
   try {
-    const user = await getUserById(id);
+    const user = await getCustomerById(id);
     if (user.length < 1) {
       return res.status(401).json({ message: "Usuário não autenticado" });
     }

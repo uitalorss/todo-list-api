@@ -1,10 +1,10 @@
-const { getUserById } = require("../repositories/getUserById");
+const { getCustomerById } = require("../repositories/getCustomerById");
 
-const getUser = async (req, res) => {
+const getCustomer = async (req, res) => {
   const { id } = req.user;
 
   try {
-    const user = await getUserById(id);
+    const user = await getCustomerById(id);
     // eslint-disable-next-line no-unused-vars
     const { password: _, ...dataUser } = user;
     return res.status(200).json(dataUser);
@@ -13,4 +13,4 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { getUser };
+module.exports = { getCustomer };

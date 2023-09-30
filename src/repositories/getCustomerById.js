@@ -1,7 +1,7 @@
 const knex = require("../connect");
 
-const getUserById = async (id) => {
+const getCustomerById = async (id) => {
   return await knex("customers").where({ id: id }).first();
 };
 
-module.exports = { getUserById };
+module.exports = { getCustomerById };

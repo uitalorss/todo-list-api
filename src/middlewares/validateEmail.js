@@ -1,11 +1,10 @@
-const {
-  isEmailAlreadyExists,
-} = require("../repositories/isEmailAlreadyExists");
+const { verifyIfEmailExits } = require("../repositories/verifyIfEmailExits");
 
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
   try {
-    if (await isEmailAlreadyExists(email)) {
+    const isEmailAlreadyExists = verifyIfEmailExits(email);
+    if (isEmailAlreadyExists) {
       return res
         .status(400)
         .json({ message: "Favor informar um email válido" });

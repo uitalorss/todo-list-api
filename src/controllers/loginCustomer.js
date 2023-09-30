@@ -1,13 +1,13 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { getUserByEmail } = require("../repositories/getUserByEmail");
+const { getCustomerByEmail } = require("../repositories/getCustomerByEmail");
 const { validatePassword } = require("../utils/validatePassword");
 
 const loginCustomer = async (req, res) => {
   const { email, senha } = req.body;
 
   try {
-    const user = await getUserByEmail(email);
+    const user = await getCustomerByEmail(email);
     if (user.length === 0) {
       return res
         .status(400)
