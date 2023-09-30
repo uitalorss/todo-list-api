@@ -8,6 +8,9 @@ const { loginCustomer } = require("../controllers/loginCustomer");
 const { authenticateUser } = require("../middlewares/authenticateUser");
 const { getCustomer } = require("../controllers/getCustomer");
 const { editCustomer } = require("../controllers/editCustomer");
+const { taskRequestSchema } = require("../schemas/taskRequestSchema");
+const { createTask } = require("../controllers/createTask");
+const { listTasks } = require("../controllers/listTasks");
 
 const router = Router();
 
@@ -17,11 +20,11 @@ router.post(
   validateEmail,
   createCustomer
 );
-
 router.post("/login", validateBody(loginSchema), loginCustomer);
-
 router.use(authenticateUser);
 router.get("/user", getCustomer);
 router.put("/user", validateBody(customerSchema), editCustomer);
+router.post("/task", validateBody(taskRequestSchema), createTask);
+router.get("/tasks", listTasks);
 
 module.exports = router;
