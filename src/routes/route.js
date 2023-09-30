@@ -11,6 +11,7 @@ const { editCustomer } = require("../controllers/editCustomer");
 const { taskRequestSchema } = require("../schemas/taskRequestSchema");
 const { createTask } = require("../controllers/createTask");
 const { listTasks } = require("../controllers/listTasks");
+const { editTask } = require("../controllers/editTask");
 
 const router = Router();
 
@@ -26,5 +27,6 @@ router.get("/user", getCustomer);
 router.put("/user", validateBody(customerSchema), editCustomer);
 router.post("/task", validateBody(taskRequestSchema), createTask);
 router.get("/tasks", listTasks);
+router.put("/task/:idTask", validateBody(taskRequestSchema), editTask);
 
 module.exports = router;
