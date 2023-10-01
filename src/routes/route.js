@@ -14,6 +14,7 @@ const { listTasks } = require("../controllers/listTasks");
 const { editTask } = require("../controllers/editTask");
 const { editTaskStatus } = require("../controllers/editTaskStatus");
 const { getTask } = require("../controllers/getTask");
+const { deleteTask } = require("../controllers/deleteTask");
 
 const router = Router();
 
@@ -32,5 +33,6 @@ router.get("/tasks", listTasks);
 router.get("/task/:idTask", getTask);
 router.put("/task/:idTask", validateBody(taskRequestSchema), editTask);
 router.patch("/task/:idTask", editTaskStatus);
+router.delete("/task/:idTask", deleteTask);
 
 module.exports = router;
