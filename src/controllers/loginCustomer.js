@@ -13,13 +13,13 @@ const loginCustomer = async (req, res) => {
         .status(400)
         .json({ message: "Usuário e/ou senha são inválidos." });
     }
-    const isPasswordValid = await validatePassword(senha, user.password);
+    const isPasswordValid = await validatePassword(senha, user[0].password);
     if (!isPasswordValid) {
       return res
         .status(400)
         .json({ message: "Usuário e/ou senha são inválidos." });
     }
-    const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, {
+    const token = jwt.sign({ id: user[0].id }, process.env.JWT_KEY, {
       expiresIn: "15m",
     });
     return res
