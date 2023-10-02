@@ -3,7 +3,8 @@ const { verifyIfEmailExits } = require("../repositories/verifyIfEmailExits");
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
   try {
-    const isEmailAlreadyExists = verifyIfEmailExits(email);
+    const isEmailAlreadyExists = await verifyIfEmailExits(email);
+    console.log(isEmailAlreadyExists);
     if (isEmailAlreadyExists) {
       return res
         .status(400)
