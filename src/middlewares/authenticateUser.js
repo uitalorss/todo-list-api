@@ -4,14 +4,26 @@ const { getCustomerById } = require("../repositories/getCustomerById");
 
 const authenticateUser = async (req, res, next) => {
   const { authorization } = req.headers;
-  if (!authorization) {
+  let authenticated = false;
+  const token = authorization.replace("Bearer", " ").trim();
+
+  if (!token) {
     return res.status(401).json({ message: "Usuário não autenticado" });
   }
-  const token = authorization.replace("Bearer", " ").trim();
-  const { id } = jwt.verify(token, process.env.JWT_KEY);
+
+  const auth = jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+    if (err) {
+      return (authenticated = false);
+    }
+    authenticated = true;
+    return decoded;
+  });
 
   try {
-    const user = await getCustomerById(id);
+    if (!authenticated) {
+      return res.status(401).json({ message: "Token expirado." });
+    }
+    const user = await getCustomerById(auth.id);
     if (user.length < 1) {
       return res.status(401).json({ message: "Usuário não autenticado" });
     }
