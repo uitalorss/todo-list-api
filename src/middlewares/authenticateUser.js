@@ -5,11 +5,12 @@ const { getCustomerById } = require("../repositories/getCustomerById");
 const authenticateUser = async (req, res, next) => {
   const { authorization } = req.headers;
   let authenticated = false;
-  const token = authorization.replace("Bearer", " ").trim();
 
-  if (!token) {
+  if (!authorization || authorization === "Bearer") {
     return res.status(401).json({ message: "Usuário não autenticado" });
   }
+
+  const token = authorization.replace("Bearer", " ").trim();
 
   const auth = jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
     if (err) {
