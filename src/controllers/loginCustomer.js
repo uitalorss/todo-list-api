@@ -20,7 +20,7 @@ const loginCustomer = async (req, res) => {
         .json({ message: "Usuário e/ou senha são inválidos." });
     }
     const token = jwt.sign({ id: user[0].id }, process.env.JWT_KEY, {
-      expiresIn: "1m",
+      expiresIn: "1h",
     });
     return res
       .status(201)
